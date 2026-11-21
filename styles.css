@@ -289,10 +289,38 @@ html[lang="fr"] .hero h1{font-size:clamp(38px,5.1vw,74px)}
 .footer a{text-decoration:none}
 .footer a:hover{color:var(--gold)}
 .copyright{margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;color:#8FA2C6}
-.wa-float{position:fixed;right:20px;bottom:20px;z-index:55;display:none;flex-direction:column;gap:10px;align-items:stretch}
+.wa-float{position:fixed;right:20px;bottom:20px;z-index:55;display:none;flex-direction:column;gap:12px;align-items:stretch}
 .wa-float.on{display:flex}
+.fl{display:flex;flex-direction:column;gap:1px;padding:11px 20px 11px 18px;border-radius:14px;background:var(--gold);color:var(--ink);text-decoration:none;box-shadow:0 14px 30px -10px rgba(6,21,48,.55);animation:breathe 2.6s ease-in-out infinite}
+.fl:nth-child(2){animation-delay:1.3s}
+.fl small{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;opacity:.8}
+.fl b{font-family:var(--display);font-size:18px;font-weight:800;letter-spacing:-.01em}
+@keyframes breathe{0%,100%{transform:scale(1);box-shadow:0 14px 30px -10px rgba(6,21,48,.55),0 0 0 0 rgba(246,190,0,.7)}50%{transform:scale(1.045);box-shadow:0 18px 34px -10px rgba(6,21,48,.55),0 0 0 14px rgba(246,190,0,0)}}
 .footer .ct{display:grid;gap:2px;margin-bottom:12px}
 .footer .ct b{color:var(--white);font-weight:700}
+
+/* top contact bar */
+.topbar{background:var(--ink);color:#DCE5F6;font-size:14px}
+.topbar .in{max-width:1200px;margin:0 auto;padding:8px 24px;display:flex;flex-wrap:wrap;gap:6px 28px;justify-content:space-between;align-items:center}
+.topbar .msg{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9FB0CF}
+.topbar .msg i{width:9px;height:9px;border-radius:50%;background:var(--green);animation:ping 2.2s infinite}
+.topbar .nums{display:flex;flex-wrap:wrap;gap:4px 24px}
+.topbar a{text-decoration:none;font-weight:600;color:#fff;display:inline-flex;gap:8px;align-items:center}
+.topbar a span{color:var(--gold);font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.topbar a:hover{color:var(--gold)}
+
+/* contact cards */
+.contact{background:var(--paper)}
+.contact-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:960px}
+.cc{background:var(--white);border:1.5px solid var(--navy);border-radius:20px;padding:34px;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.cc::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:var(--c,var(--green))}
+.cc .k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.cc h3{font-size:clamp(26px,3vw,34px);font-weight:800;font-variation-settings:'wdth' 88;letter-spacing:-.02em;overflow-wrap:anywhere}
+.cc .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.cc .btn{animation:breathe 2.6s ease-in-out infinite}
+.cc .btn.btn-line{animation:none}
+.cc:nth-child(2){--c:var(--red)}
+
 
 /* responsive */
 @media (max-width:1020px){
@@ -333,6 +361,14 @@ html[lang="fr"] .hero h1{font-size:clamp(38px,5.1vw,74px)}
   .ledger div{grid-template-columns:1fr;gap:6px}
   .footer-grid{grid-template-columns:1fr}
   .manifest::before,.manifest::after{display:none}
+  .contact-cards{grid-template-columns:1fr}
+  .wa-float{left:12px;right:12px;bottom:12px;flex-direction:row;gap:10px}
+  .wa-float .fl{flex:1;padding:9px 12px}
+  .fl b{font-size:15px}
+  .fl small{font-size:10px}
+  .footer{padding-bottom:110px}
+  .topbar .msg{display:none}
+  .topbar .in{justify-content:center;padding:8px 16px}
   .faq summary{font-size:18px}
   .faq details p{padding-right:4px}
   .brand img{height:60px}

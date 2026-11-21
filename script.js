@@ -12,8 +12,8 @@
      email: one shared address, e.g. "hello@vivncha.com"
   ------------------------------------------------------------------ */
   var CONFIG = {
-    nigeria:  { whatsapp: '', phone: '' },
-    cameroon: { whatsapp: '', phone: '' },
+    nigeria:  { whatsapp: '2349130627542', phone: '2349130627542' },
+    cameroon: { whatsapp: '237650820523', phone: '237650820523' },
     email: ''
   };
 
@@ -43,6 +43,7 @@
     'rs.p.some': 'Send it to us on WhatsApp, or copy it and send it any way you prefer.',
     'rs.copied': 'Copied',
     'ct.ng': 'Nigeria', 'ct.cm': 'Cameroon', 'wa.ng': 'WhatsApp Nigeria', 'wa.cm': 'WhatsApp Cameroon',
+    'ct.chat': 'Chat on WhatsApp', 'ct.call': 'Call', 'ct.line': 'Contact line', 'tb.msg': 'Talk to us now',
     'rs.fix': 'Please complete your name, country, business line and what you need.'
   };
   var FR = {
@@ -127,6 +128,8 @@
     'rs.p.some': 'Envoyez-le-nous sur WhatsApp, ou copiez-le et envoyez-le comme vous préférez.',
     'rs.copied': 'Copié',
     'ct.ng': 'Nigeria', 'ct.cm': 'Cameroun', 'wa.ng': 'WhatsApp Nigeria', 'wa.cm': 'WhatsApp Cameroun',
+    'ct.chat': 'Écrire sur WhatsApp', 'ct.call': 'Appeler', 'ct.line': 'Ligne de contact', 'tb.msg': 'Parlez-nous maintenant',
+    'ct.eyebrow': 'Parlez-nous', 'ct.h2': 'Vous préférez parler ? Écrivez-nous maintenant.', 'ct.p': 'Choisissez la ligne la plus proche de vous. Dites-nous ce qu’il vous faut et nous vous indiquerons la suite.',
     'rs.fix': 'Veuillez renseigner votre nom, votre pays, votre secteur et votre besoin.'
   };
 
@@ -357,23 +360,36 @@
   });
 
   /* ---------------------- contacts (only shows what is configured) ---------------------- */
+  function fmt(n) {
+    var d = String(n).replace(/\D/g, '');
+    if (d.indexOf('234') === 0 && d.length === 13) return '+234 ' + d.slice(3, 6) + ' ' + d.slice(6, 9) + ' ' + d.slice(9);
+    if (d.indexOf('237') === 0 && d.length === 12) return '+237 ' + d.slice(3, 4) + ' ' + d.slice(4, 6) + ' ' + d.slice(6, 8) + ' ' + d.slice(8, 10) + ' ' + d.slice(10);
+    return '+' + d;
+  }
   function renderContacts() {
-    var box = $('#contactBox'), html = '';
-    [['nigeria', 'ct.ng'], ['cameroon', 'ct.cm']].forEach(function (p) {
+    var lines = [['nigeria', 'ct.ng', '#waFloatNG', 'wa.ng'], ['cameroon', 'ct.cm', '#waFloatCM', 'wa.cm']];
+    var box = $('#contactBox'), html = '', cards = '', top = '';
+    lines.forEach(function (p) {
       var c = CONFIG[p[0]];
-      if (!c || !(c.whatsapp || c.phone)) return;
+      var num = c && (c.whatsapp || c.phone);
+      var fl = $(p[2]);
+      if (!num) { fl.hidden = true; return; }
+      var wa = c.whatsapp, ph = c.phone || c.whatsapp;
       html += '<p class="ct"><b>' + t(p[1]) + '</b>';
-      if (c.whatsapp) html += '<a href="' + waLink(c.whatsapp) + '" target="_blank" rel="noopener">WhatsApp +' + c.whatsapp + '</a>';
-      if (c.phone) html += '<a href="tel:+' + c.phone + '">' + (c.whatsapp ? 'Call ' : '') + '+' + c.phone + '</a>';
-      html += '</p>';
+      if (wa) html += '<a href="' + waLink(wa) + '" target="_blank" rel="noopener">WhatsApp ' + fmt(wa) + '</a>';
+      html += '<a href="tel:+' + ph + '">' + (wa ? t('ct.call') + ' ' : '') + fmt(ph) + '</a></p>';
+      cards += '<div class="cc"><span class="k">' + t('ct.line') + '</span><h3>' + t(p[1]) + ' · ' + fmt(wa || ph) + '</h3><div class="acts">' +
+        (wa ? '<a class="btn btn-gold" href="' + waLink(wa) + '" target="_blank" rel="noopener">' + t('ct.chat') + '</a>' : '') +
+        '<a class="btn btn-line" href="tel:+' + ph + '">' + t('ct.call') + '</a></div></div>';
+      top += '<a href="' + (wa ? waLink(wa) : 'tel:+' + ph) + '" ' + (wa ? 'target="_blank" rel="noopener"' : '') + '><span>' + t(p[1]) + '</span>' + fmt(wa || ph) + '</a>';
+      if (wa) { fl.href = waLink(wa); fl.innerHTML = '<small>' + t(p[3]) + '</small><b>' + fmt(wa) + '</b>'; fl.hidden = false; } else { fl.hidden = true; }
     });
-    if (CONFIG.email) html += '<p class="ct"><a href="mailto:' + CONFIG.email + '">' + CONFIG.email + '</a></p>';
+    if (CONFIG.email) { html += '<p class="ct"><a href="mailto:' + CONFIG.email + '">' + CONFIG.email + '</a></p>'; }
     if (html) box.innerHTML = html;
-    [['nigeria', '#waFloatNG', 'wa.ng'], ['cameroon', '#waFloatCM', 'wa.cm']].forEach(function (p) {
-      var el = $(p[1]), c = CONFIG[p[0]];
-      if (c && c.whatsapp) { el.href = waLink(c.whatsapp); el.textContent = t(p[2]); el.hidden = false; } else { el.hidden = true; }
-    });
-    var fl = $('#waFloat'); if (fl) fl.classList.toggle('on', !!(CONFIG.nigeria.whatsapp || CONFIG.cameroon.whatsapp));
+    var cc = $('#contactCards'); if (cc) cc.innerHTML = cards;
+    var sec = $('#contact'); if (sec) sec.hidden = !cards;
+    var tb = $('#topbar'); if (tb) { tb.hidden = !top; tb.innerHTML = top ? '<div class="in"><span class="msg"><i></i>' + t('tb.msg') + '</span><span class="nums">' + top + '</span></div>' : ''; }
+    var fw = $('#waFloat'); if (fw) fw.classList.toggle('on', !!(CONFIG.nigeria.whatsapp || CONFIG.cameroon.whatsapp));
   }
 
   /* ---------------------- header, menu, progress, year ---------------------- */
