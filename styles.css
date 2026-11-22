@@ -299,16 +299,6 @@ html[lang="fr"] .hero h1{font-size:clamp(38px,5.1vw,74px)}
 .footer .ct{display:grid;gap:2px;margin-bottom:12px}
 .footer .ct b{color:var(--white);font-weight:700}
 
-/* top contact bar */
-.topbar{background:var(--ink);color:#DCE5F6;font-size:14px}
-.topbar .in{max-width:1200px;margin:0 auto;padding:8px 24px;display:flex;flex-wrap:wrap;gap:6px 28px;justify-content:space-between;align-items:center}
-.topbar .msg{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9FB0CF}
-.topbar .msg i{width:9px;height:9px;border-radius:50%;background:var(--green);animation:ping 2.2s infinite}
-.topbar .nums{display:flex;flex-wrap:wrap;gap:4px 24px}
-.topbar a{text-decoration:none;font-weight:600;color:#fff;display:inline-flex;gap:8px;align-items:center}
-.topbar a span{color:var(--gold);font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
-.topbar a:hover{color:var(--gold)}
-
 /* contact cards */
 .contact{background:var(--paper)}
 .contact-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:960px}
@@ -367,8 +357,6 @@ html[lang="fr"] .hero h1{font-size:clamp(38px,5.1vw,74px)}
   .fl b{font-size:15px}
   .fl small{font-size:10px}
   .footer{padding-bottom:110px}
-  .topbar .msg{display:none}
-  .topbar .in{justify-content:center;padding:8px 16px}
   .faq summary{font-size:18px}
   .faq details p{padding-right:4px}
   .brand img{height:60px}

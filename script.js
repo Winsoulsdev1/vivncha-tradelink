@@ -368,7 +368,7 @@
   }
   function renderContacts() {
     var lines = [['nigeria', 'ct.ng', '#waFloatNG', 'wa.ng'], ['cameroon', 'ct.cm', '#waFloatCM', 'wa.cm']];
-    var box = $('#contactBox'), html = '', cards = '', top = '';
+    var box = $('#contactBox'), html = '', cards = '';
     lines.forEach(function (p) {
       var c = CONFIG[p[0]];
       var num = c && (c.whatsapp || c.phone);
@@ -381,14 +381,12 @@
       cards += '<div class="cc"><span class="k">' + t('ct.line') + '</span><h3>' + t(p[1]) + ' · ' + fmt(wa || ph) + '</h3><div class="acts">' +
         (wa ? '<a class="btn btn-gold" href="' + waLink(wa) + '" target="_blank" rel="noopener">' + t('ct.chat') + '</a>' : '') +
         '<a class="btn btn-line" href="tel:+' + ph + '">' + t('ct.call') + '</a></div></div>';
-      top += '<a href="' + (wa ? waLink(wa) : 'tel:+' + ph) + '" ' + (wa ? 'target="_blank" rel="noopener"' : '') + '><span>' + t(p[1]) + '</span>' + fmt(wa || ph) + '</a>';
       if (wa) { fl.href = waLink(wa); fl.innerHTML = '<small>' + t(p[3]) + '</small><b>' + fmt(wa) + '</b>'; fl.hidden = false; } else { fl.hidden = true; }
     });
     if (CONFIG.email) { html += '<p class="ct"><a href="mailto:' + CONFIG.email + '">' + CONFIG.email + '</a></p>'; }
     if (html) box.innerHTML = html;
     var cc = $('#contactCards'); if (cc) cc.innerHTML = cards;
     var sec = $('#contact'); if (sec) sec.hidden = !cards;
-    var tb = $('#topbar'); if (tb) { tb.hidden = !top; tb.innerHTML = top ? '<div class="in"><span class="msg"><i></i>' + t('tb.msg') + '</span><span class="nums">' + top + '</span></div>' : ''; }
     var fw = $('#waFloat'); if (fw) fw.classList.toggle('on', !!(CONFIG.nigeria.whatsapp || CONFIG.cameroon.whatsapp));
   }
 
