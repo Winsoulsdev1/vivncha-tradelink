@@ -1,4 +1,4 @@
-/* VIVNCHA TRADELINK site script
+/* NCHAGO TRADELINK site script
    1) CONFIG: add your real contact details below before launch.
    2) Route chart, EN/FR switch, request form, small UI helpers. */
 (function () {
@@ -9,7 +9,7 @@
      whatsapp / phone: digits only with country code and no plus sign.
        Nigeria example:  "2348012345678"
        Cameroon example: "237670123456"
-     email: one shared address, e.g. "hello@vivncha.com"
+     email: one shared address, e.g. "hello@nchago.com"
   ------------------------------------------------------------------ */
   var CONFIG = {
     nigeria:  { whatsapp: '2349130627542', phone: '2349130627542' },
@@ -22,6 +22,7 @@
 
   /* ---------------------- strings used by script ---------------------- */
   var EN = {
+    'car.prev': 'Previous photo', 'car.next': 'Next photo', 'car.go': 'Go to photo', 'car.label': 'Photos of our work', 'car.choose': 'Choose photo',
     'm.aba': 'Footwear, leather goods and garments.',
     'm.onitsha': 'Wholesale and general merchandise on a very large scale.',
     'm.lagos': 'Imports, electronics, fashion and fast-moving goods.',
@@ -36,7 +37,7 @@
     'mode.yes': 'In person',
     'mode.no': 'Remote',
     'mode.unsure': 'To be confirmed',
-    'msg.hello': 'Hello VIVNCHA TRADELINK,\n\nI would like help with a business request.',
+    'msg.hello': 'Hello NCHAGO TRADELINK,\n\nI would like help with a business request.',
     'msg.name': 'Name', 'msg.country': 'Country', 'msg.biz': 'Business', 'msg.ind': 'Business line',
     'msg.market': 'Market of interest', 'msg.budget': 'Estimated budget', 'msg.travel': 'Travel', 'msg.need': 'What I need',
     'rs.p.none': 'Copy this message and send it to us. Our direct contact details are being finalised.',
@@ -47,11 +48,23 @@
     'rs.fix': 'Please complete your name, country, business line and what you need.'
   };
   var FR = {
-    'meta.title': 'VIVNCHA TradeLink | Relier les entreprises à travers l’Afrique',
+    'nav.proof': 'Nos réalisations',
+    'proof.eyebrow': 'Nos réalisations', 'proof.h2': 'Voyez le travail derrière la promesse.',
+    'proof.p': 'De vraies photos de notre travail : marchandises emballées, étiquetées, chargées et en route entre les marchés.',
+    'ph1': 'Marchandises emballées, ficelées et étiquetées à notre nom',
+    'ph2': 'Une pirogue chargée de colis pour la voie fluviale',
+    'ph3': 'Chargement des marchandises sur une pirogue au bord de l’eau',
+    'ph4': 'Ballots arrimés et prêts à partir',
+    'ph5': 'Chargement des marchandises pour la route',
+    'ph6': 'Manutention sur le terrain, au marché',
+    'ph7': 'Marchandises en déplacement dans le marché',
+    'ph8': 'Stock empilé dans l’entrepôt',
+    'car.prev': 'Photo précédente', 'car.next': 'Photo suivante', 'car.go': 'Aller à la photo', 'car.label': 'Photos de notre travail', 'car.choose': 'Choisir une photo',
+    'meta.title': 'NCHAGO TradeLink | Relier les entreprises à travers l’Afrique',
     'nav.services': 'Services', 'nav.how': 'Comment ça marche', 'nav.ways': 'Nos formules', 'nav.faq': 'FAQ', 'nav.cta': 'Demander de l’aide',
     'hero.tag': 'Corridor Nigeria ↔ Cameroun · Ouvert',
     'hero.h1': 'Commercez au-delà des frontières avec quelqu’un <mark>sur le terrain.</mark>',
-    'hero.lead': 'VIVNCHA TRADELINK aide les entreprises africaines à trouver des fournisseurs, des fabricants et des partenaires sur de nouveaux marchés, et les accompagne de la première rencontre à la poignée de main finale.',
+    'hero.lead': 'NCHAGO TRADELINK aide les entreprises africaines à trouver des fournisseurs, des fabricants et des partenaires sur de nouveaux marchés, et les accompagne de la première rencontre à la poignée de main finale.',
     'hero.cta1': 'Lancer une demande', 'hero.cta2': 'Voir comment ça marche',
     'chip.trust': 'Confiance', 'chip.rel': 'Fiabilité', 'chip.acc': 'Accessibilité', 'chip.pro': 'Protection',
     'chart.title': 'Carte du corridor', 'chart.hint': 'Choisissez un marché', 'chart.kind': 'Souvent réputé pour', 'chart.plan': 'Planifier une visite ici',
@@ -60,7 +73,7 @@
     'fact.4k': 'Prochainement', 'fact.4v': 'Ghana · Togo · Côte d’Ivoire',
     'about.eyebrow': 'Ce que nous faisons',
     'about.h2': 'Nous construisons le pont. <span>Vous construisez l’entreprise.</span>',
-    'about.p1': 'VIVNCHA TRADELINK est une entreprise de facilitation d’affaires et d’accès aux marchés. Nous aidons les entrepreneurs à atteindre des fournisseurs, des fabricants, des distributeurs et des partenaires sur des marchés qu’ils ne connaissent pas encore.',
+    'about.p1': 'NCHAGO TRADELINK est une entreprise de facilitation d’affaires et d’accès aux marchés. Nous aidons les entrepreneurs à atteindre des fournisseurs, des fabricants, des distributeurs et des partenaires sur des marchés qu’ils ne connaissent pas encore.',
     'about.p2': 'Nous commençons par le corridor Nigeria–Cameroun, où des acheteurs camerounais se rendent déjà sur les marchés nigérians. De là, nous nous tournons vers le Ghana, le Togo, la Côte d’Ivoire et au-delà.',
     'about.yes': 'Nous sommes', 'about.yesd': 'Un guide, un facilitateur de rencontres et un coordinateur pour votre entreprise sur un marché que vous découvrez.',
     'about.no': 'Nous ne sommes pas', 'about.nod': 'Un vendeur de produits. Nous ne promettons jamais un résultat que nous ne contrôlons pas. Nous promettons un processus clair et un effort sincère.',
@@ -122,7 +135,7 @@
     'mn.border': 'Frontière Mfum–Ekok', 'kind.border': 'À propos de ce passage', 'kind.market': 'Souvent réputé pour',
     'mf.draft': 'Brouillon', 'mf.within': 'À l’intérieur du Nigeria',
     'mode.yes': 'Sur place', 'mode.no': 'À distance', 'mode.unsure': 'À confirmer',
-    'msg.hello': 'Bonjour VIVNCHA TRADELINK,\n\nJ’aimerais de l’aide pour une demande d’affaires.',
+    'msg.hello': 'Bonjour NCHAGO TRADELINK,\n\nJ’aimerais de l’aide pour une demande d’affaires.',
     'msg.name': 'Nom', 'msg.country': 'Pays', 'msg.biz': 'Entreprise', 'msg.ind': 'Secteur', 'msg.market': 'Marché visé', 'msg.budget': 'Budget estimé', 'msg.travel': 'Voyage', 'msg.need': 'Mon besoin',
     'rs.p.none': 'Copiez ce message et envoyez-le-nous. Nos coordonnées directes sont en cours de finalisation.',
     'rs.p.some': 'Envoyez-le-nous sur WhatsApp, ou copiez-le et envoyez-le comme vous préférez.',
@@ -159,9 +172,9 @@
     yaounde: { x: 560, y: 640, name: 'Yaoundé',       side: 't', kind: 'cm' }
   };
   var ARCS = [
-    ['border', 'kano', 0.16, '#1F8F3A'], ['border', 'lagos', 0.2, '#1F8F3A'], ['border', 'onitsha', -0.25, '#1F8F3A'],
-    ['border', 'aba', -0.25, '#1F8F3A'], ['border', 'ph', -0.2, '#1F8F3A'],
-    ['douala', 'border', 0.2, '#F6BE00'], ['yaounde', 'border', -0.18, '#F6BE00']
+    ['border', 'kano', 0.16, '#2FA640'], ['border', 'lagos', 0.2, '#2FA640'], ['border', 'onitsha', -0.25, '#2FA640'],
+    ['border', 'aba', -0.25, '#2FA640'], ['border', 'ph', -0.2, '#2FA640'],
+    ['douala', 'border', 0.2, '#E2AE14'], ['yaounde', 'border', -0.18, '#E2AE14']
   ];
 
   function buildChart() {
@@ -203,7 +216,7 @@
         // larger invisible hit area for touch
         s('circle', { r: 24, fill: 'transparent' }, grp);
       } else {
-        s('circle', { r: 5, fill: '#F6BE00', stroke: '#061530', 'stroke-width': 2 }, grp);
+        s('circle', { r: 5, fill: '#E2AE14', stroke: '#06220C', 'stroke-width': 2 }, grp);
       }
       var pos = { r: [16, 5, 'start'], l: [-16, 5, 'end'], t: [0, -18, 'middle'], b: [0, 28, 'middle'] }[n.side];
       var tx = s('text', { x: pos[0], y: pos[1], 'text-anchor': pos[2], class: 'lbl' + (interactive ? '' : ' dim') }, grp);
@@ -216,13 +229,13 @@
 
     // rotating stamp
     var st = s('g', { transform: 'translate(550,92)' }, chart);
-    s('circle', { r: 66, fill: 'rgba(6,21,48,.7)', stroke: 'rgba(255,255,255,.18)' }, st);
+    s('circle', { r: 66, fill: 'rgba(6,34,12,.7)', stroke: 'rgba(255,255,255,.18)' }, st);
     var spin = s('g', { class: 'stamp' }, st);
     s('path', { id: 'stampPath', d: 'M-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0', fill: 'none' }, spin);
     var tp = s('text', { class: 'stamp-txt' }, spin);
     var tpp = s('textPath', { href: '#stampPath' }, tp);
     tpp.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#stampPath');
-    tpp.textContent = 'VIVNCHA TRADELINK · NIGERIA · CAMEROON · ';
+    tpp.textContent = 'NCHAGO TRADELINK · NIGERIA · CAMEROON · ';
     var defs = s('defs', {}, st);
     var cp = s('clipPath', { id: 'markClip' }, defs); s('circle', { r: 30 }, cp);
     s('circle', { r: 31, fill: '#fff' }, st);
@@ -272,8 +285,9 @@
       el.setAttribute('placeholder', (l === 'fr' && FR[k] !== undefined) ? FR[k] : el.dataset.enPh);
     });
     $$('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-lang') === l ? 'true' : 'false'); });
-    document.title = l === 'fr' ? FR['meta.title'] : 'VIVNCHA TradeLink';
+    document.title = l === 'fr' ? FR['meta.title'] : 'NCHAGO TradeLink';
     $('#mfNo').textContent = t('mf.draft');
+    if (car.labels) car.labels();
     renderContacts();
     renderCard();
     renderManifest();
@@ -407,6 +421,69 @@
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   $('#year').textContent = new Date().getFullYear();
+
+
+  /* ---------------------- trust photo carousel ---------------------- */
+  var car = { i: 0, timer: null, stopped: false };
+  (function () {
+    var track = $('#carTrack'); if (!track) return;
+    var slides = $$('.car-slide', track), n = slides.length;
+    var dotsBox = $('#carDots'), count = $('#carCount');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    slides.forEach(function (sl, k) {
+      var d = document.createElement('button');
+      d.type = 'button'; d.className = 'car-dot';
+      d.addEventListener('click', function () { userGo(k); });
+      dotsBox.appendChild(d);
+    });
+    var dots = $$('.car-dot', dotsBox);
+    function goTo(k) {
+      car.i = (k + n) % n;
+      track.scrollTo({ left: slides[car.i].offsetLeft - track.offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    function userGo(k) { car.stopped = true; stop(); goTo(k); }
+    function mark(k) {
+      car.i = k;
+      dots.forEach(function (d, j) { d.setAttribute('aria-current', j === k ? 'true' : 'false'); });
+      count.textContent = (k + 1) + ' / ' + n;
+    }
+    var raf = 0;
+    track.addEventListener('scroll', function () {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function () {
+        var k = Math.round(track.scrollLeft / track.clientWidth);
+        k = Math.max(0, Math.min(n - 1, k));
+        if (k !== car.i || !dots[k].hasAttribute('aria-current')) mark(k);
+      });
+    }, { passive: true });
+    $('#carPrev').addEventListener('click', function () { userGo(car.i - 1); });
+    $('#carNext').addEventListener('click', function () { userGo(car.i + 1); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); userGo(car.i - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); userGo(car.i + 1); }
+    });
+    function stop() { if (car.timer) { clearInterval(car.timer); car.timer = null; } }
+    function start() {
+      if (reduce || car.stopped || car.timer) return;
+      car.timer = setInterval(function () { goTo(car.i + 1); }, 4500);
+    }
+    var wrap = $('#carousel');
+    wrap.addEventListener('mouseenter', stop); wrap.addEventListener('mouseleave', start);
+    wrap.addEventListener('focusin', stop); wrap.addEventListener('focusout', start);
+    wrap.addEventListener('touchstart', function () { car.stopped = true; stop(); }, { passive: true });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { en[0].isIntersecting ? start() : stop(); }, { threshold: 0.4 }).observe(wrap);
+    }
+    window.addEventListener('resize', function () { track.scrollLeft = slides[car.i].offsetLeft - track.offsetLeft; });
+    mark(0);
+    car.labels = function () {
+      $('#carPrev').setAttribute('aria-label', t('car.prev'));
+      $('#carNext').setAttribute('aria-label', t('car.next'));
+      wrap.setAttribute('aria-label', t('car.label'));
+      dotsBox.setAttribute('aria-label', t('car.choose'));
+      dots.forEach(function (d, j) { d.setAttribute('aria-label', t('car.go') + ' ' + (j + 1)); });
+    };
+  })();
 
   /* ---------------------- boot ---------------------- */
   buildChart();
